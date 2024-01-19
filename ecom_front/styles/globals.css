@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mainTitle {
+  @apply text-3xl font-normal mt-3 ml-3 mb-4;
+}
+
+/* Pay Button */
+.btnPay {
+  @apply bg-black rounded-lg shadow-lg text-white px-5 py-2 mt-2;
+}
+
+.btnPay:hover {
+  @apply bg-gray-800; /* Adding a hover effect */
+}
+
+.inputP {
+  @apply border shadow-md w-full px-5 py-2 rounded-md mb-2;
+}
+.inputP :focus {
+  @apply border border-cyan-800;
+}
+table.basic {
+  @apply w-full bg-white rounded-sm shadow-md text-center;
+}
+table.basic thead tr td,
+table.basic thead tr th {
+  @apply text-sm text-gray-600 uppercase border-b border-gray-200 px-4 py-2 text-center;
+}
+
+table.basic tr td {
+  @apply px-4 py-1;
+}
+table.basic a {
+  @apply inline-flex gap-1 mx-1 items-center text-sm;
+}
+
+/* Svg Search Animation  */
+
+.magnify {
+  fill: #4f3f90;
+  animation: search 1s infinite ease;
+}
+.doc {
+  fill: #886aff;
+  animation: flyby 1s infinite ease;
+}
+
+@keyframes search {
+  0% {
+    transform: translate(40px, 40px) scale(0.6);
+  }
+  50% {
+    transform: translate(20px, 20px) scale(0.6);
+  }
+  100% {
+    transform: translate(40px, 40px) scale(0.6);
+  }
+}
+
+@keyframes flyby {
+  0% {
+    transform: translate(-20px, 20px) scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(30px, 20px) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100px, 20px) scale(0.2);
+    opacity: 0;
+  }
+}

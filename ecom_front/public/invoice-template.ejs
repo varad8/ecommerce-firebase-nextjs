@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Page</title>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .gray-text {
+            color: #0d0d0d;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .total-text {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logotitle {
+            display: block;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .container {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 logo">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+            </svg>
+            <div class="logotitle">VRN ECOMMERCE</div>
+        </div>
+
+        <div>568,At post karwanchiwadi ratnagiri-415639</div>
+        <div>Email:- varadnikharage201@gmai.com</div>
+        <div>Contact:- +91 7058834216</div>
+
+        <hr />
+        <div>
+
+            <div>
+                <h1 class="section-title">Invoice</h1>
+                <p class="gray-text">Invoice Number: <%= invoiceNo %>
+                </p>
+                <p class="gray-text">Tracking No: <%= invoiceData.trackingno %>
+                </p>
+            </div>
+
+        </div>
+        <div class="mb-8">
+            <div class="mb-8">
+                <p class="gray-text">Bill To: </p>
+                <h2 class="text-lg font-semibold">
+                    <%= invoiceData.fullname %>
+                </h2>
+                <p>Order ID : <%= invoiceData._id %>
+                </p>
+                <p>
+                    <%= invoiceData.streetaddress %>
+                </p>
+                <p>
+                    <%= invoiceData.district %>, <%= invoiceData.state %>, <%= invoiceData.postalcode %>
+                </p>
+                <p>Email: <%= invoiceData.email %>
+                </p>
+            </div>
+
+        </div>
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4">Description</th>
+                    <th class="py-2 px-4">Quantity</th>
+                    <th class="py-2 px-4">Price</th>
+                    <th class="py-2 px-4">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% invoiceData.line_items.forEach(item=> { %>
+                    <tr>
+                        <td class="py-2 px-4">
+                            <%= item.price_data.product_data.name %>
+                        </td>
+                        <td class="py-2 px-4">
+                            <%= item.quantity %>
+                        </td>
+                        <td class="py-2 px-4">
+                            <%= (item.price_data.unit_amount / 100).toFixed(2) %>
+                        </td>
+                        <td class="py-2 px-4">
+                            <%= ((item.price_data.unit_amount / 100) * item.quantity).toFixed(2) %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        <div class="total">
+            <p class="gray-text">Subtotal: ₹<%= subtotal.toFixed(2) %>
+            </p>
+            <p class="gray-text">Tax (10%): ₹<%= (subtotal * 0.1).toFixed(2) %>
+            </p>
+            <p class="total-text">Total: ₹<%= (subtotal + (subtotal * 0.1)).toFixed(2) %>
+            </p>
+        </div>
+
+        <hr />
+
+        <p class="note">Note : This is an auto generated Invoice</p>
+    </div>
+</body>
+
+</html>
