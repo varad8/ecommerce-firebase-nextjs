@@ -67,4 +67,46 @@ The total revenue calculation functionality calculates total revenue based on di
 
 User management functionalities include fetching user details, updating user roles, and retrieving admin users.
 
-Feel free to explore the individual files for detailed implementation and customization.
+---
+
+# User Client
+
+This repository contains the client-side code for the user interface of the ecommerce-firebase-nextjs web app. The client is built using Next.js, integrating with the backend API routes for user-related functionalities.
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Authentication](#authentication)
+3. [Product Search](#product-search)
+4. [Order History](#order-history)
+5. [Address Management](#address-management)
+6. [Invoice Generation](#invoice-generation)
+7. [Stripe Webhooks](#stripe-webhooks)
+
+## Overview
+
+The User Client serves as the frontend interface for users interacting with the ecommerce web app. It includes features for searching and viewing products, managing orders, addresses, and generating invoices.
+
+## Authentication
+
+Authentication is implemented using NextAuth with Google as the provider. Users can sign in with their Google accounts, and the client fetches user data from the backend.
+
+## Product Search
+
+The product search functionality allows users to search for products based on product names. The search is case-insensitive and returns matching products.
+
+## Order History
+
+Users can view their order history by making requests to the backend API. The client fetches and displays order details, including order status and tracking information.
+
+## Address Management
+
+Address management functionalities include viewing, creating, updating, and deleting user addresses. The client communicates with the backend API to perform these operations.
+
+## Invoice Generation
+
+Users can generate invoices for their orders. The client sends a request to the backend API with the order ID, and the backend generates an invoice email with the order details.
+
+## Stripe Webhooks
+
+The client includes a webhook endpoint to handle events from the Stripe payment system. It listens for the `checkout.session.completed` event and updates the order status in the database accordingly.
